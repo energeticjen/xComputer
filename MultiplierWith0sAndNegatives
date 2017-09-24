@@ -1,0 +1,54 @@
+; start counter/check
+		lod number2
+		sto check
+
+; check for negative number2
+		jmn negmath
+
+; store number1 as total
+	 begin: lod number1
+		sto total
+
+; decrease counter to check to see if math has happened enough times
+	counter: lod check
+		dec
+		sto check
+
+; if enough math has happened, jump to end
+		jmz end
+		jmn end2
+
+; add number1 to itself and save
+	   math: lod total
+		add number1
+	         sto total
+
+; go check if counter is 0, potentially repeat math step
+		jmp counter
+
+; switching the signs on both numbers so the check works correctly
+	negmath: not number2
+		inc
+		sto number2
+		sto check
+		lod number1
+		not number1
+		inc
+		sto number1
+		jmp begin
+
+; display as total then stop
+	   end: lod total 
+		hlt
+
+; for math with number2 as 0, display 0 as total 
+; (because the counter feature will have made it -1), then stop
+	  end2: lod number2
+		sto total
+		lod total
+		hlt
+
+number1: -1
+number2: 10
+check: 0
+total: 0
