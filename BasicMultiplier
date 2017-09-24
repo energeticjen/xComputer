@@ -1,0 +1,32 @@
+; start counter/check
+		lod number2
+		sto check
+
+; store number1 as total
+		lod number1
+		sto total
+
+; decrease counter to check to see if math has happened enought times
+	counter: lod check
+		 dec
+		sto check
+
+; if enough math has happened, jump to end
+		jmz end
+
+; add number1 to itself and save
+	   math: lod total
+		add number1
+	         sto total
+
+; go check if counter is 0, potentially repeat math step
+		jmp counter
+
+; display as total then stop
+	end: lod total 
+	     hlt
+
+number1: 45
+number2: 116
+check: 0
+total: 0
